@@ -8,7 +8,7 @@ intelligent management system that can train itself on tracking various aspects 
 
 <h4> The goal of this application are below:</h4>
 <h4>1. Real time attendance by face recognition </h4>
-<h4>An attempt to make a Face recognition system for students in class rooms and employees at offices. The system is based on a special type of cnn architecture known as a " **siamese network** ".  Such a network is trained to generate a very accurate and almost unique 128 vector given that the images of face which a are fed to the network are properly aligned and cropped. 
+<h4>An attempt to make a Face recognition system for students in class rooms and employees at offices. The system is based on a special type of cnn architecture known as a **siamese network**.  Such a network is trained to generate a very accurate and almost unique 128 vector given that the images of face which a are fed to the network are properly aligned and cropped. 
 Then another dense neural network is trained taking input these embeddings. The second neural network is only for classification purposes. Then the person who is identified by the system, his/her attendance in the system is incremented by 1.
 When the system is closed, a excel file consisting of attendance of all the students is generated<h4>
 
