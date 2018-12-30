@@ -12,8 +12,7 @@ intelligent management system that can train itself on tracking various aspects 
 Then another dense neural network is trained taking input these embeddings. The second neural network is only for classification purposes. Then the person who is identified by the system, his/her attendance in the system is incremented by 1.
 When the system is closed, a excel file consisting of attendance of all the students is generated<h4>
 
-<h4>3. Smart Contracts for better delivery and management</h4>
-
-  
+![alt text](https://cdn-images-1.medium.com/max/1600/1*z9gzhxpLxqqsXI7r6yzgog.jpeg)
 Taken from DeepLearning.ai.
 You can watch these videos. Professor Andrew Ng gives an excellent explanation to these networks.</h3>
+<h4>2. Smart Contracts for better delivery and management</h4>
