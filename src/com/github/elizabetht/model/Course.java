@@ -30,6 +30,8 @@ public class Course
 		return CourseDescription;
 	}
 	public void setCourseDescription(String CourseDescription) {
+		
+		System.out.println("inside the setter for courseDescription");
 		this.CourseDescription = CourseDescription;
 	}
 	

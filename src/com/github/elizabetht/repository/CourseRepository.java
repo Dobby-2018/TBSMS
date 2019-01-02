@@ -4,33 +4,38 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 
 import com.github.elizabetht.model.Course;
+//import com.github.elizabetht.model.Course;
 import com.github.elizabetht.util.DbUtil;
 
 public class CourseRepository 
 {
 
 	private Connection dbConnection;
-	
-
 	private Course course;
 
-	public Course getCourse() {
+	public CourseRepository()
+	{
+		dbConnection=DbUtil.getConnection();
+		course=new Course();
+	}
+	/*public Course getCourse() {
 		return course;
 	}
-
 	public void setCourse(Course course) {
 		this.course = course;
-	}
-
-	public void save(String courseName, int courseID,int duration, String CourseDescription) {
+	}*/
+	public void saveCourse(String courseName, int courseID,int duration, String CourseDescription)
+	{
+		
 		if (dbConnection != null) {
 			try {
+				
+				System.out.println("db connection formed");
+				
 				PreparedStatement prepStatement = dbConnection
-						.prepareStatement("insert into course(courseID,courseName,duration,CourseDescription) values (?, ?, ?, ?)");
+						.prepareStatement("insert into course(CourseID,courseName,Duration,CourseDescription) values (?, ?, ?, ?)");
 				prepStatement.setInt(1, courseID);
 				prepStatement.setString(2, courseName);
 				prepStatement.setInt(3, duration);
@@ -46,7 +51,7 @@ public class CourseRepository
 		}
 	}
 
-	public boolean findByCourseName(String courseName) {
+/*	public boolean findByCourseName(String courseName) {
 		if (dbConnection != null) {
 			try {
 				PreparedStatement prepStatement = dbConnection
@@ -66,22 +71,32 @@ public class CourseRepository
 			}
 		}
 		return false;
-	}
+	}*/
 
-	public boolean findByName(String courseName) {
+	public boolean findCourseByName(String courseName) {
+		
+		String crs,desc;
 		if (dbConnection != null) {
 			try {
 				PreparedStatement prepStatement = dbConnection
-						.prepareStatement("select CourseDescription from course where courseName = ?");
+						.prepareStatement("select courseName,CourseDescription from course where courseName = ?");
 				prepStatement.setString(1, courseName);
 
 				ResultSet result = prepStatement.executeQuery();
 				if (result != null) {
+					//crs=result.getString(1);
 					while (result.next()) {
-						if (result.getString(1).equals(courseName)) {
+						
+						crs=result.getString(1);
+						if (crs.equals(courseName)) {
 							//fetching the description from the db and setting it directly into the bean field:
+							System.out.println("Description:"+result.getString(2));
 							
-							course.setCourseDescription(result.getString("CourseDescription"));
+							desc=result.getString(2);
+							
+							System.out.println("value of desc= "+desc);
+							
+							course.setCourseDescription(desc);
 							return true;
 						}
 					}

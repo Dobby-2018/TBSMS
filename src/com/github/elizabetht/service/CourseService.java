@@ -15,12 +15,18 @@ public class CourseService
 	//Entering new course--- Only present in view rendered for the admin
 	public String save(String courseName, int courseID, int duration, String discription) {
 		if (courseRepository != null) {
-			if (courseRepository.findByName(courseName)) {
+			
+			
+			if (courseRepository.findCourseByName(courseName)) {
+				
+				System.out.println("course already exists");
 				return "Course already Exists";
 			}
-			courseRepository.save(courseName, courseID, duration,discription);
+			courseRepository.saveCourse(courseName, courseID, duration,discription);
+			System.out.println("Course entered into the records");
 			return "CourseEntrySuccess";
 		} else {
+			System.out.println("Course can't be entered into db");
 			return "CourseEntryFailure";
 		}
 	}
@@ -28,13 +34,28 @@ public class CourseService
 	public String findByName(String courseName) {
 		String result = "CourseNotFoundFailure";
 		if (courseRepository != null) {
-			boolean status = courseRepository.findByName(courseName);
+			System.out.println("Checking the course" + result);
+			
+			boolean status = courseRepository.findCourseByName(courseName);
 			if (status) {
+				
+				System.out.println("Course found");
 				result = "Course FoundSuccess";
 						
 				return result;
 			}
 		}
+		System.out.println(result);
 		return result;
+	}
+	
+	
+	//Test stub
+	public static void main(String [] args)
+	{
+		CourseService cs=new CourseService();
+		//cs.save("Python",3, 40, "Regular batch");
+		cs.findByName("Python");
+	
 	}
 }
