@@ -111,7 +111,7 @@ input[type="text"],input[type="password"] {
 								</s:select>
 
 								<div class="col-lg-9 col-lg-offset-3">
-									<s:submit cssClass="btn btn-default" value="Cancel" />
+						s			<s:submit cssClass="btn btn-default" value="Cancel" />
 									<s:submit cssClass="btn btn-primary" value="Login" />
 								</div>
 								<s:hidden name="pageName" value="login" />

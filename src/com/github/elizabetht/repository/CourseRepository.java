@@ -4,78 +4,65 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+
 
 import com.github.elizabetht.model.Course;
 //import com.github.elizabetht.model.Course;
 import com.github.elizabetht.util.DbUtil;
 
-public class CourseRepository 
-{
+public class CourseRepository {
 
 	private Connection dbConnection;
 	private Course course;
 
-	public CourseRepository()
-	{
-		dbConnection=DbUtil.getConnection();
-		course=new Course();
+	public CourseRepository() {
+		dbConnection = DbUtil.getConnection();
+		course = new Course();
 	}
-	/*public Course getCourse() {
-		return course;
-	}
-	public void setCourse(Course course) {
-		this.course = course;
-	}*/
-	public void saveCourse(String courseName, int courseID,int duration, String CourseDescription)
-	{
-		
+
+	/*
+	 * public Course getCourse() { return course; } public void setCourse(Course
+	 * course) { this.course = course; }
+	 */
+	public void saveCourse(String courseName, int courseID, int duration, String CourseDescription) {
+
 		if (dbConnection != null) {
 			try {
-				
+
 				System.out.println("db connection formed");
-				
-				PreparedStatement prepStatement = dbConnection
-						.prepareStatement("insert into course(CourseID,courseName,Duration,CourseDescription) values (?, ?, ?, ?)");
+
+				PreparedStatement prepStatement = dbConnection.prepareStatement(
+						"insert into course(CourseID,courseName,Duration,CourseDescription) values (?, ?, ?, ?)");
 				prepStatement.setInt(1, courseID);
 				prepStatement.setString(2, courseName);
 				prepStatement.setInt(3, duration);
-				prepStatement.setString(4, CourseDescription);				
-				
+				prepStatement.setString(4, CourseDescription);
 
 				prepStatement.executeUpdate();
 			} catch (SQLException e) {
 				e.printStackTrace();
-			} catch (Exception e) {				
+			} catch (Exception e) {
 				e.printStackTrace();
 			}
 		}
 	}
 
-/*	public boolean findByCourseName(String courseName) {
-		if (dbConnection != null) {
-			try {
-				PreparedStatement prepStatement = dbConnection
-						.prepareStatement("select count(*) from course where courseName = ?");
-				prepStatement.setString(1, courseName);
-
-				ResultSet result = prepStatement.executeQuery();
-				if (result != null) {
-					while (result.next()) {
-						if (result.getInt(1) == 1) {
-							return true;
-						}
-					}
-				}
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-		}
-		return false;
-	}*/
+	/*
+	 * public boolean findByCourseName(String courseName) { if (dbConnection !=
+	 * null) { try { PreparedStatement prepStatement = dbConnection
+	 * .prepareStatement("select count(*) from course where courseName = ?");
+	 * prepStatement.setString(1, courseName);
+	 * 
+	 * ResultSet result = prepStatement.executeQuery(); if (result != null) { while
+	 * (result.next()) { if (result.getInt(1) == 1) { return true; } } } } catch
+	 * (Exception e) { e.printStackTrace(); } } return false; }
+	 */
 
 	public boolean findCourseByName(String courseName) {
-		
-		String crs,desc;
+
+		String crs, desc;
 		if (dbConnection != null) {
 			try {
 				PreparedStatement prepStatement = dbConnection
@@ -84,18 +71,19 @@ public class CourseRepository
 
 				ResultSet result = prepStatement.executeQuery();
 				if (result != null) {
-					//crs=result.getString(1);
+					// crs=result.getString(1);
 					while (result.next()) {
-						
-						crs=result.getString(1);
+
+						crs = result.getString(1);
 						if (crs.equals(courseName)) {
-							//fetching the description from the db and setting it directly into the bean field:
-							System.out.println("Description:"+result.getString(2));
-							
-							desc=result.getString(2);
-							
-							System.out.println("value of desc= "+desc);
-							
+							// fetching the description from the db and setting it directly into the bean
+							// field:
+							System.out.println("Description:" + result.getString(2));
+
+							desc = result.getString(2);
+
+							System.out.println("value of desc= " + desc);
+
 							course.setCourseDescription(desc);
 							return true;
 						}
@@ -108,5 +96,32 @@ public class CourseRepository
 		return false;
 	}
 
-	
+	public ArrayList<Course> courseList() {
+		if (dbConnection != null) {
+			
+			ArrayList<Course> cList=new ArrayList<>();
+
+			try {
+				Statement stmt = dbConnection.createStatement();
+				ResultSet rs = stmt.executeQuery("Select * from course");
+
+				while (rs.next()) {
+					Course course = new Course();
+					course.setCourseID(rs.getInt("CourseID"));
+					course.setCourseName(rs.getString("courseName"));
+					course.setDuration(rs.getInt("Duration"));
+					course.setCourseDescription(rs.getString("CourseDescription"));
+					
+					cList.add(course);
+				}
+				
+				return cList;
+			} 
+			catch (Exception e) {
+
+			}
+			return null;
+		}
+		return null;
+	}
 }

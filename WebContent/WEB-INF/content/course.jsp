@@ -68,12 +68,13 @@ color:"black";
 				<p>To get started, you need to enter your details to enroll with
 					us. Or login to access your details, if you are already enrolled.</p> -->
 					
-					<s:select list="availableCourse" name="selectedCourse" label="Courses available" 
+					<s:select name="selectedCourse" list="availableCourse" listKey="selectedCourse" label="Courses available" 
 					headerKey="-1" headerValue="Choose a course" ></s:select>
 					
 					
 					
-					
+					<s:select name="selectedDuration" list="availableDuration" listKey="selectedDuration" label="Choose Course Duration" 
+					headerKey="-1" headerValue="Choose a duration" ></s:select>
 					
 					
 			</div>

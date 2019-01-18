@@ -51,22 +51,31 @@ public class LoginAction extends ActionSupport {
 		this.userRole = userRole;
 	}
 
-	
-
 	public LoginAction() {
-		userRole=new ArrayList<String>();
+		
+		System.out.println("inside LoginAction constructor");
+		userRole = new ArrayList<String>();
 		userRole.add("Student");
 		userRole.add("Trainer");
 		userRole.add("Admin");
 	}
 
-	public String getSelectedRole() {
-		return selectedRole;
-	}
+	/*
+	 * public String getSelectedRole() {
+	 * 
+	 * System.out.println("in getter of role "+selectedRole); return selectedRole; }
+	 */
 
 	@RequiredStringValidator(type = ValidatorType.FIELD, message = "User Type is a required field")
 	public void setSelectedRole(String selectedRole) {
+		System.out.println(selectedRole);
 		this.selectedRole = selectedRole;
+	}
+
+	public String getSelectedRole() {
+
+		System.out.println("in getter of role " + selectedRole);
+		return selectedRole;
 	}
 
 	public String getPageName() {

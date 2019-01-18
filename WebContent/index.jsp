@@ -39,7 +39,7 @@ body {
 					<ul class="dropdown-menu">
 						<li><a href="#">Contact us</a></li>
 						<li class="divider"></li>
-						<li><a href="course-input">Courses Offered</a></li>
+						<li><a href="course">Courses Offered</a></li>
 					</ul></li>
 			</ul>
 		</div>
@@ -57,6 +57,11 @@ body {
 				class="btn btn-primary" href="login-input">Login » </a>
 		</div>
 		
+		<div>
+		
+			<a href="TestCourse">Go to Test page</a>
+		
+		</div>
 		
 
 		

@@ -1,5 +1,8 @@
 package com.github.elizabetht.service;
 
+import java.util.ArrayList;
+
+import com.github.elizabetht.model.Course;
 import com.github.elizabetht.repository.CourseRepository;
 
 
@@ -47,6 +50,13 @@ public class CourseService
 		}
 		System.out.println(result);
 		return result;
+	}
+	
+	public ArrayList<Course> coursesOffered()
+	{
+		ArrayList<Course> course=courseRepository.courseList();
+		
+		return course;
 	}
 	
 	
